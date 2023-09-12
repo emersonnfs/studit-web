@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
-  const [senha, setSenha] = useState(''); 
+  const [senha, setSenha] = useState('');
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -24,9 +24,12 @@ const LoginPage = () => {
       });
 
       if (response.ok) {
+        const responseData = await response.json();
         console.log('Login bem-sucedido');
+        localStorage.setItem('loginData', JSON.stringify(responseData));
+        window.location.href = '/homepage'
       } else {
-        console.error('Erro no login');
+        alert('Erro no login');
       }
     } catch (error) {
       console.error('Erro na solicitação:', error);
@@ -80,6 +83,4 @@ const LoginPage = () => {
   );
 };
 
-export default function LoginPagewithClient() {
-  return <LoginPage />;
-}
+export default LoginPage;

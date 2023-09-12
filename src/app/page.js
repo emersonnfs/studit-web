@@ -1,8 +1,17 @@
-import Login from '@/app/login/login'
-
+'use client'
+import { useEffect } from 'react';
 
 export default function Home() {
-  return (
-    <Login/>
-  );
+
+  useEffect(() => {
+    const loginData = localStorage.getItem('loginData');
+
+    if (!loginData) {
+      window.location.href = '/login';
+    } else {
+      window.location.href = '/homepage';
+    }
+  }, []);
+
+  return null;
 }
